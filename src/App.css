@@ -20,3 +20,9 @@
 .key{
   width: 25%;
 }
+
+@media (max-width: 600px) {
+  .calculator{
+    width: 90vw;
+}
+}
