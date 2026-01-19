@@ -22,7 +22,7 @@ function Key({face, onKeyPress}){
 
 function Keypad({ onKeyPress }){
   return (
-    <>
+    <div className="key-pad">
       <div className="key-row">
         <Key onKeyPress={onKeyPress} face="(" />
         <Key onKeyPress={onKeyPress} face=")" />
@@ -53,7 +53,7 @@ function Keypad({ onKeyPress }){
         <Key onKeyPress={onKeyPress} face="=" />
         <Key onKeyPress={onKeyPress} face="+" />
       </div>
-    </>
+    </div>
   )
 }
 
