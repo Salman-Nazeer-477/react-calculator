@@ -1,10 +1,11 @@
 import './App.css'
+import { useState } from 'react'
 
-function Display({result, previousExpression}){
+function Display({result, prevExpression}){
   return (
     <>
       <div className="Display">
-        <div className="prev-expression">{previousExpression}</div>
+        <div className="prev-expression">{prevExpression}</div>
         <input 
           type="text" 
           value={result}
@@ -15,54 +16,71 @@ function Display({result, previousExpression}){
   )
 }
 
-function Key({face}){
-  return <button className="key">{face}</button>
+function Key({face, onKeyPress}){
+  return <button onClick={()=> onKeyPress(face)} className="key">{face}</button>
 }
 
-function Keypad(){
+function Keypad({ onKeyPress }){
   return (
     <>
       <div className="key-row">
-        <Key face="(" />
-        <Key face=")" />
-        <Key face="%" />
-        <Key face="AC" />
+        <Key onKeyPress={onKeyPress} face="(" />
+        <Key onKeyPress={onKeyPress} face=")" />
+        <Key onKeyPress={onKeyPress} face="%" />
+        <Key onKeyPress={onKeyPress} face="AC" />
       </div>
       <div className="key-row">
-        <Key face="7" />
-        <Key face="8" />
-        <Key face="9" />
-        <Key face="/" />
+        <Key onKeyPress={onKeyPress} face="7" />
+        <Key onKeyPress={onKeyPress} face="8" />
+        <Key onKeyPress={onKeyPress} face="9" />
+        <Key onKeyPress={onKeyPress} face="/" />
       </div>
       <div className="key-row">
-        <Key face="4" />
-        <Key face="5" />
-        <Key face="6" />
-        <Key face="*" />
+        <Key onKeyPress={onKeyPress} face="4" />
+        <Key onKeyPress={onKeyPress} face="5" />
+        <Key onKeyPress={onKeyPress} face="6" />
+        <Key onKeyPress={onKeyPress} face="*" />
       </div>
       <div className="key-row">
-        <Key face="1" />
-        <Key face="2" />
-        <Key face="3" />
-        <Key face="-" />
+        <Key onKeyPress={onKeyPress} face="1" />
+        <Key onKeyPress={onKeyPress} face="2" />
+        <Key onKeyPress={onKeyPress} face="3" />
+        <Key onKeyPress={onKeyPress} face="-" />
       </div>
       <div className="key-row">
-        <Key face="0" />
-        <Key face="." />
-        <Key face="=" />
-        <Key face="+" />
+        <Key onKeyPress={onKeyPress} face="0" />
+        <Key onKeyPress={onKeyPress} face="." />
+        <Key onKeyPress={onKeyPress} face="=" />
+        <Key onKeyPress={onKeyPress} face="+" />
       </div>
     </>
   )
 }
 
-function App() {
 
+
+function App() {
+  const [result, setResult] = useState('')
+  const [prevExpression, setPrevExpression] = useState('')
+
+  function onKeyPress(face){
+    if(face === 'AC') setResult('')
+    else if(face === '=') {
+      setPrevExpression(result)
+      setResult(currResult => eval(currResult))
+    }
+    else setResult(currResult => currResult + face)
+  }
   return (
     <>
       <div className="calculator">
-        <Display />
-        <Keypad />
+        <Display 
+          result={result}
+          prevExpression={prevExpression}
+        />
+        <Keypad
+          onKeyPress={onKeyPress}
+        />
       </div>
     </>
   )
