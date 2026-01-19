@@ -1,0 +1,1 @@
+*{margin:0;padding:0}body{display:flex;align-items:center;justify-content:center;height:100vh}.calculator{width:30vw}.result{width:99%}.key{width:25%}@media(max-width:600px){.calculator{width:90vw}}
