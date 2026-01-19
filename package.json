@@ -2,10 +2,13 @@
   "name": "react-calculator",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://salman-nazeer-477.github.io/react-calculator",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "lint": "eslint .",
     "preview": "vite preview"
   },
