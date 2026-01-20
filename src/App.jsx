@@ -13,8 +13,14 @@ function App() {
   function onKeyPress(face) {
     if (face === 'AC') setResult('')
     else if (face === '=') {
-      setPrevExpression(result)
-      setResult(currResult => eval(currResult))
+      try{
+        setPrevExpression(result)
+        const temp = eval(result)
+        setResult(temp)
+      } catch(error){
+        setResult("Error")
+      }
+      
     }
     else setResult(currResult => currResult + face)
   }
